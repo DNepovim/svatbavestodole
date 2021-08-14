@@ -133,8 +133,10 @@ const A: React.FC<{href: string; targetBlank?: true}> = ({children, href, target
       }
     `}
     href={href}
-    target={targetBlank ? "_blank" : undefined}
-    rel={targetBlank ? "noreferrer noopener" : undefined }
+    {...(targetBlank ? {
+      target: "_blank",
+      rel: "noreferrer noopener"
+    } : {})}
   >{children}</a>
 )
 
