@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
 import React, { useState } from 'react'
-import { webalize } from '../utils/webalize'
 import { css, Global, SerializedStyles } from '@emotion/react'
 import Head from 'next/head'
 import Image from 'next/image'
@@ -97,7 +96,6 @@ const Title: React.FC<{children: string; level: TitleLevel, image?: StaticImageD
       align-items: inline;
       color: ${colors.brand};
     `,
-    id: webalize(children),
     children: <>{image && <><Image src={image} layout="fixed" height="30" width="30" />&nbsp;</>}{children}</>
   }
   switch (level) {
