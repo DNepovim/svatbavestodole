@@ -97,8 +97,19 @@ const plan = [
     description: "Písnička, písnička, písnička...",
   },
   {
+    title: "Zakrojení divočáka"
+  },
+  {
     startTime: 20,
     title: <A href="https://harmonikar.net/" targetBlank>Harmonikář Jindra Kelíšek hraje ke zpěvu i tanci</A>
+  },
+  {
+    startTime: 22,
+    title: "Ještě volnější zábava"
+  },
+  {
+    startTitle: 9.5,
+    title: "Pravidelná nedělní bohoslužba v kostele"
   }
 ]
 
@@ -130,7 +141,7 @@ const Column: React.FC<{span?: 1 | 2 | 3 | 4}> = ({children}) => (
     css={css`
       display: inline-block;
       width: 100%;
-      max-width: 450px;
+      max-width: 430px;
       margin: 0 auto;`}
     >
       {children}
@@ -141,23 +152,18 @@ const Section: React.FC<{title?: string}> = ({children, title}) => {
   return (
     <section
       css={css`
-        max-width: 500px;
+        max-width: 460px;
         margin: 0 auto;
-        padding: 25px;
+        padding: 15px;
 
-        @media (min-width: 1000px) {
-          max-width: 1000px;
+        @media (min-width: 920px) {
+          max-width: 920px;
           column-count: 2;
         }
 
-        @media (min-width: 1500px) {
-          max-width: 1500px;
+        @media (min-width: 1380px) {
+          max-width: 1380px;
           column-count: 3;
-        }
-
-        @media (min-width: 2000px) {
-          max-width: 2000px;
-          column-count: 4;
         }
       `}
     >
