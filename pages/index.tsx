@@ -228,7 +228,7 @@ export default function Home() {
             <p>Chcete-li však zapadnout do svatební vřavy, oblečte si šaty, či oblek. Necete-li do zmiňované vřavy zapadnout, oblečte si co chcete.</p>
           </Column>
           <Column>
-            <Title level={2} image={strom1}>A kdybyste měmli hlad&hellip;</Title>
+            <Title level={2} image={strom1}>A kdybyste měli hlad&hellip;</Title>
             <p>&hellip;tak jste si asi spletli svatbu. Na té naší se můžete po hned po bohoslužbě těšit na pořádný oběd na zahradě přímo u kostela, následovaný stoly prohýbajícími se pod tíhou nejrůznějšího jídla a pití.</p>
             <p>Budeme moc rádi, pokud na odpolední raut přispějete něčím drobným, nebo i méně drobným, co uvaříte, upečete nebo natrháte doma. Může to být cokoli – sladké, slané, jídlo, pití&hellip; Když do formuláře s účastí vyplníte, co byste mohli na raut připravit, ozve se vám Eliška a domluví se s vámi.</p>
             <p>A protože chceme mít na svatbě víc jídla, než odpadků, nenajdete na ní jednorázové nádobí a vícerázového bude pomálu. Přivezte si tedy vlastní jídelní náčiní. Doporučujeme misku, sklenici a příbory. Určitě si sbalte i krabičku a láhev na svačinu na cestu.</p>
