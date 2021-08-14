@@ -43,6 +43,26 @@ const HoverPicture: React.FC<HoverPictureProps> = ({src, onHoverSrc, alt, css}) 
   return <Image src={currentSrc} alt={alt} css={css} onMouseEnter={() => {setCurrentSrc(onHoverSrc)}} onMouseLeave={() => setCurrentSrc(src)} />
 }
 
+const A: React.FC<{href: string; targetBlank?: true}> = ({children, href, targetBlank}) => (
+  <a
+    css={css`
+      position: relative;
+      color: ${colors.brand};
+      text-decoration: none;
+
+      &:hover {
+        background-color: ${colors.brand};
+        color: white;
+      }
+    `}
+    href={href}
+    {...(targetBlank ? {
+      target: "_blank",
+      rel: "noreferrer noopener"
+    } : {})}
+  >{children}</a>
+)
+
 enum Venues {
   church = "kostel",
   tea = "čajovna",
@@ -54,34 +74,31 @@ const plan = [
   {
     startTime: 11,
     title: "Obřad",
-    venue: Venues.church
 
   },
   {
-    startTime: 12,
     title: "Gratulace a focení",
-    venue: Venues.courtyard
   },
   {
-    startTime: 13,
     title: "Oběd",
-    description: "Pro svatebčany bude na kostelní zahradě připravený guláš, boršč a nějký ten salát aby nehladověli zatím co se rodina bude nacpávat na faře.",
-    venue: Venues.courtyard
+    description: "Pro svatebčany bude na kostelní zahradě připravený guláš, boršč a nějký ten salát aby nehladověli zatím co se rodina bude cpát na faře.",
   },
   {
     startTime: 15,
-    title: "Zakrojení dortu",
+    title: "Zakrojení dortu a zahájení zahradní slavnosti",
     venue: Venues.courtyard
   },
   {
-    startTime: 16,
     title: "Koncert Marie Bláhové a Radky Dimitrovové",
     description: "Písnička, písnička, písnička...",
-    venue: Venues.church
+  },
+  {
+    title: <A href="https://www.facebook.com/jinymetro/" targetBlank>Jiný metro</A>,
+    description: "Písnička, písnička, písnička...",
   },
   {
     startTime: 20,
-    title: "Tanec"
+    title: <A href="https://harmonikar.net/" targetBlank>Harmonikář Jindra Kelíšek hraje ke zpěvu i tanci</A>
   }
 ]
 
@@ -119,26 +136,6 @@ const Column: React.FC<{span?: 1 | 2 | 3 | 4}> = ({children}) => (
       {children}
     </div>
   )
-
-const A: React.FC<{href: string; targetBlank?: true}> = ({children, href, targetBlank}) => (
-  <a
-    css={css`
-      position: relative;
-      color: ${colors.brand};
-      text-decoration: none;
-
-      &:hover {
-        background-color: ${colors.brand};
-        color: white;
-      }
-    `}
-    href={href}
-    {...(targetBlank ? {
-      target: "_blank",
-      rel: "noreferrer noopener"
-    } : {})}
-  >{children}</a>
-)
 
 const Section: React.FC<{title?: string}> = ({children, title}) => {
   return (
@@ -202,7 +199,7 @@ export default function Home() {
           <Column span={1}>
             <Picture css={css`max-width: 100%;`} src={srcOznameni} alt="Kostel" />
             <p>Máme se rádi a proto se budeme brát. Jestli nás máte také rádi, přijďte nám fandit.</p>
-            <p>Oddá nás bratr farář a kamárd Ondřej Zikmund v malém tolerančním kostele z konce 18. století</p>
+            <p>Oddá nás bratr farář a kamárd Ondřej Zikmund v <A href="https://mapy.cz/s/jafosomeso" targetBlank>malém evangelickém tolerančním kostele</A>  z konce 18. století, který leží na dohled od chaldících věží neratovické chemičky v přilehlé obci Libiš. Obřad bude součástí evangelické boshoslužby.</p>
           </Column>
           <Column>
             <Title level={2} image={strom1}>Dostanete se k nám&hellip;</Title>
@@ -237,8 +234,8 @@ export default function Home() {
             <p>A protože chceme mít na svatbě víc jídla, než odpadků, nenajdete na ní jednorázové nádobí a vícerázového bude pomálu. Přivezte si tedy vlastní jídelní náčiní. Doporučujeme misku, sklenici a příbory. Určitě si sbalte i krabičku a láhev na svačinu na cestu.</p>
           </Column>
           <Column>
-            TODO
             <Title level={2}>S sebou</Title>
+            TODO
             <p> Vlastní jídelní servis (sklenici, talíř či misku a příbor)
             Krabičku a lahev na svačinu na cestu
             Věci na spaní (spacák, karimatku, případně stan)
@@ -250,7 +247,7 @@ export default function Home() {
               <tbody>
                 {plan.map((item, index) => (
                   <tr key={index}>
-                    <td css={css`vertical-align: baseline; padding-right: 0.2rem;`}>{numberToTime(item.startTime)}</td>
+                    <td css={css`vertical-align: baseline; padding-right: 0.2rem;`}>{item.startTime ? numberToTime(item.startTime) : ""}</td>
                     <td css={css`padding-bottom: 0.6rem;`}>
                       <strong>{item.title}</strong>
                       <br />{item.description}
