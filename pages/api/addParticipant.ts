@@ -1,4 +1,4 @@
-import { Client, LogLevel } from "@notionhq/client"
+import { Client } from "@notionhq/client"
 import { InputPropertyValueMap, PagesCreateResponse } from "@notionhq/client/build/src/api-endpoints"
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { ParticipantToRegister } from "../../components/ParticipantForm/ParticipantForm"
@@ -59,7 +59,6 @@ export default async function handler(
   } catch (e) {
     Sentry.setTag("node_env", process.env.NODE_ENV)
     Sentry.setTag("end", "backend")
-    Sentry.setTag("buildNumber", process.env.CONFIG_BUILD_ID)
     Sentry.setContext("values", parsedValues)
     Sentry.setContext("headers", req.headers)
     Sentry.captureEvent(e)
