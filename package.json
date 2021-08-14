@@ -9,14 +9,24 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.4.0",
+    "@notionhq/client": "^0.2.4",
+    "@sentry/node": "^6.11.0",
+    "@sentry/tracing": "^6.11.0",
+    "formik": "^2.2.9",
     "next": "11.0.1",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-tooltip": "^4.2.21",
+    "webalize": "^0.1.0",
+    "yup": "^0.32.9"
   },
   "devDependencies": {
+    "@emotion/babel-preset-css-prop": "^11.2.0",
     "@types/react": "17.0.15",
     "eslint": "7.32.0",
     "eslint-config-next": "11.0.1",
+    "prettier": "2.3.2",
     "typescript": "4.3.5"
   }
 }
