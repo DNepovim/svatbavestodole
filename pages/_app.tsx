@@ -1,6 +1,6 @@
 import type { AppProps } from 'next/app'
 import { transitions, positions, Provider as AlertProvider } from 'react-alert'
-import AlertTemplate from "react-alert-template-basic";
+import AlertTemplate from "react-alert-template-basic"
 
 
 function MyApp({ Component, pageProps }: AppProps) {

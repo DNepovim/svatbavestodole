@@ -1,14 +1,12 @@
 /** @jsxImportSource @emotion/react */
 import React, { ReactNode } from "react"
 import * as yup from 'yup'
-import { Formik, Form, Field, FormikHelpers, ErrorMessage } from "formik"
+import { Formik, Form, Field, ErrorMessage } from "formik"
 import { css } from "@emotion/react"
 import { colors } from "../../pages"
 import strom4 from '../../images/strom4.jpg'
 import Image from 'next/image'
 import { useAlert } from 'react-alert'
-import { Success } from "../../pages/api/addParticipant"
-
 
 enum KindOfFood {
   Salad = "salát",

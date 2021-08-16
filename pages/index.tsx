@@ -13,6 +13,7 @@ import { numberToTime } from '../utils/numberToTime'
 import ReactTooltip from 'react-tooltip'
 
 
+
 export const colors = {
   brand: "#298447",
   light: "#29844722",
@@ -46,30 +47,25 @@ const HoverPicture: React.FC<HoverPictureProps> = ({src, onHoverSrc, alt, css}) 
 }
 
 const A: React.FC<{href: string; targetBlank?: true}> = ({children, href, targetBlank}) => (
-  <a
-    css={css`
-      position: relative;
-      color: ${colors.brand};
-      text-decoration: none;
+    <a
+      css={css`
+        position: relative;
+        color: ${colors.brand};
+        text-decoration: none;
 
-      &:hover {
-        text-decoration: underline;
-      }
-    `}
-    href={href}
-    {...(targetBlank ? {
-      target: "_blank",
-      rel: "noreferrer noopener"
-    } : {})}
-  >{children}</a>
+        &:hover {
+          text-decoration: underline;
+        }
+      `}
+      href={href}
+      {...(targetBlank ? {
+        target: "_blank",
+        rel: "noreferrer noopener"
+      } : {})}
+    >
+      {children}
+    </a>
 )
-
-enum Venues {
-  church = "kostel",
-  tea = "čajovna",
-  stage = "pódium",
-  courtyard = "nádvoří"
-}
 
 const plan = [
   {
