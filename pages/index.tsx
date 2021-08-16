@@ -51,8 +51,7 @@ const A: React.FC<{href: string; targetBlank?: true}> = ({children, href, target
       text-decoration: none;
 
       &:hover {
-        background-color: ${colors.brand};
-        color: white;
+        text-decoration: underline;
       }
     `}
     href={href}
@@ -108,7 +107,7 @@ const plan = [
     title: "Ještě volnější zábava"
   },
   {
-    startTitle: 9.5,
+    startTime: 9.5,
     title: "Pravidelná nedělní bohoslužba v kostele"
   }
 ]
@@ -262,7 +261,7 @@ export default function Home() {
               <tbody>
                 {plan.map((item, index) => (
                   <tr key={index}>
-                    <td css={css`vertical-align: baseline; padding-right: 0.2rem;`}>{item.startTime ? numberToTime(item.startTime) : ""}</td>
+                    <td css={css`vertical-align: baseline; padding-right: 0.2rem; text-align: right;`}>{item.startTime ? numberToTime(item.startTime) : ""}</td>
                     <td css={css`padding-bottom: 0.6rem;`}>
                       <strong>{item.title}</strong>
                       <br />{item.description}
