@@ -183,7 +183,7 @@ const getNotionFieldDef = (def: NotionFieldDef): InputPropertyValueMap => {
       return {
         [def.name]: {
           type: def.type,
-          [def.type]: def.value ?? NaN
+          [def.type]: Number(def.value) ?? NaN
         }
       }
     case NotionFieldType.Select:

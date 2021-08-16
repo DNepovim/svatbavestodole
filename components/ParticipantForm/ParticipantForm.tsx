@@ -271,7 +271,7 @@ export const ParticipantForm: React.FC = () => {
             ]}
             disabled={props.isSubmitting}
           />
-          {props.values?.count === "more" && <TextInput label="No a kolik vás teda bude?" name="familyCount" type="number" min={2} disabled={props.isSubmitting} />}
+          {props.values?.count === "more" && <TextInput label="No a kolik vás teda bude?" name="familyCount" disabled={props.isSubmitting} />}
           <OptionsInput
             label="S hostinou nám"
             name="helpWithFood"
