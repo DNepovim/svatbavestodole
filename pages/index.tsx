@@ -197,6 +197,15 @@ export default function Home() {
             font-family: "Bitter";
             margin: 0;
           }
+
+          @keyframes rotating {
+            from {
+              transform: rotate(0deg);
+            }
+            to {
+              transform: rotate(360deg);
+            }
+          }
         `}
       />
 

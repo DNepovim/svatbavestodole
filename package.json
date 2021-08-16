@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "node server.js",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -13,9 +13,12 @@
     "@notionhq/client": "^0.2.4",
     "@sentry/node": "^6.11.0",
     "@sentry/tracing": "^6.11.0",
+    "@types/react-alert": "^5.2.1",
     "formik": "^2.2.9",
-    "next": "11.0.1",
+    "next": "^11.0.1",
     "react": "17.0.2",
+    "react-alert": "^7.0.3",
+    "react-alert-template-basic": "^1.0.2",
     "react-dom": "17.0.2",
     "react-tooltip": "^4.2.21",
     "webalize": "^0.1.0",

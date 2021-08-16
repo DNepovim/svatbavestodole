@@ -4,6 +4,11 @@ import * as yup from 'yup'
 import { Formik, Form, Field, FormikHelpers, ErrorMessage } from "formik"
 import { css } from "@emotion/react"
 import { colors } from "../../pages"
+import strom4 from '../../images/strom4.jpg'
+import Image from 'next/image'
+import { useAlert } from 'react-alert'
+import { Success } from "../../pages/api/addParticipant"
+
 
 enum KindOfFood {
   Salad = "salát",
@@ -77,7 +82,7 @@ const Fieldset: React.FC = ({children}) => (
       flex-flow: column;
       border: none;
       padding: 0;
-      margin: 0 0 1rem;
+      margin: 0;
     `}
   >
     {children}
@@ -87,9 +92,10 @@ const Fieldset: React.FC = ({children}) => (
 interface FieldProps {
   name: string
   label?: ReactNode
-  type?: "text" | "number" | "radio" | "checkbox"
+  type?: "text" | "number" | "radio" | "checkbox" | "textarea"
   min?: number
   max?: number
+  disabled?: boolean
 }
 
 interface Option {
@@ -113,19 +119,21 @@ const FieldError: React.FC<{name: string}> = ({name}) => (
   </div>
 )
 
-export const TextInput: React.FC<FieldProps> = ({ label, name }) =>  (
+export const TextInput: React.FC<FieldProps> = ({ label, name, type, disabled}) =>  (
   <Fieldset>
     {label && <Label name={name}>{label}</Label>}
     <Field
+      id={name}
+      as={type}
       css={css`
         color: ${colors.brand};
         font-size: 1.2rem;
-        padding: 0.4rem 0 0.1rem;
-        border: none;
-        border-image: url(/cara.jpg) 30 round;
-        border-bottom: 5px solid transparent;
-        border-right: 5px solid transparent;
+        padding: 0.4rem 0.6rem;
+        border-image: url(/frame.png) 20 round;
+        border-width: 7px;
         transition: background-color 300ms;
+        width: 100%;
+        box-sizing: border-box;
 
         &:focus {
           outline: none;
@@ -133,33 +141,25 @@ export const TextInput: React.FC<FieldProps> = ({ label, name }) =>  (
         }
       `}
       name={name}
+      disabled={disabled}
     />
     <FieldError name={name} />
   </Fieldset>
 )
 
-export const TextAreaInput: React.FC<FieldProps> = ({ label, name }) => {
-  return (
-    <Fieldset>
-      {label && <Label name={name}>{label}</Label>}
-      <Field as="textarea" name={name} />
-      <FieldError name={name} />
-    </Fieldset>
-  )
-}
-
-const OptionsInput: React.FC<FieldProps & { options: Option[] }> = ({label, options, ...props }) => {
+const OptionsInput: React.FC<FieldProps & { options: Option[] }> = ({label, options, disabled, ...props }) => {
   const type = props.type ?? "checkbox"
   return (
     <Fieldset>
       {label && <Label name={props.name}>{label}</Label>}
       {options.map(({label, value}) => (
         <React.Fragment key={`${props.name}-${value}`}>
-          <Field id={`${props.name}-${value}`} css={css`display: none`} type={type} name={props.name} value={value} />
+          <Field id={`${props.name}-${value}`} css={css`display: none`} type={type} name={props.name} value={value} disabled={disabled} />
           <div>
             <label
               htmlFor={`${props.name}-${value}`}
               css={css`
+                cursor: pointer;
                 &:before {
                   content: "";
                   display: inline-block;
@@ -186,154 +186,188 @@ const OptionsInput: React.FC<FieldProps & { options: Option[] }> = ({label, opti
   )
 }
 
-const SubmitButton:React.FC = ({children}) => (
+const SubmitButton:React.FC<{isSubmiting?: boolean}> = ({children, isSubmiting}) => (
   <button
     css={css`
-      background-color: white
+      display: flex;
+      align-items: center;
+      font-family: "Bitter";
+      background-color: white;
+      color: ${colors.brand};
+      font-size: 1.2rem;
+      padding: 0rem 0.9rem 0 0.3rem;
+      border-image: url(/frame.png) 20 round;
+      border-width: 7px;
+      cursor: pointer;
+
+      img {
+        transform: rotate(0);
+        transition: transform 300ms;
+        ${isSubmiting ? "animation: rotating 2s linear infinite;" : ""}
+
+      }
+
+      &:hover img {
+        transform: rotate(360deg)
+      }
     `}
     type="submit"
+    disabled={isSubmiting}
   >
-    {children}
+    <Image src={strom4} layout="fixed" height="20" width="20" alt=""/>
+    &nbsp;{children}
   </button>
 )
 
 const isAlone = (count?: Count): boolean => !count || count === Count.one
 
-export const ParticipantForm: React.FC = () => (
-  <Formik<Partial<ParticipantToRegister>>
-    initialValues={{
-      firstName: "",
-      surName: "",
-      email: "",
-      count: undefined,
-      familyCount: undefined,
-      helpWithFood: undefined,
-      kindOfFood: undefined,
-      kindOfFoodSpec: undefined,
-      arrival: undefined,
-      departure: undefined,
-      note: undefined
-    }}
-    validationSchema={schema}
-    onSubmit={async (values: Partial<ParticipantToRegister>, { setSubmitting }: FormikHelpers<Partial<ParticipantToRegister>>) => {
-      await fetch("/api/addParticipant", { method: "POST", body: JSON.stringify(values) })
-      setSubmitting(false)
-    }}
-  >
-    {props => (
-      <Form css={css`max-width: 300px`}>
-        <TextInput label={<>...jaké je tvé <strong>jméno</strong>,</>} name="firstName" />
-        <TextInput label={<><strong>příjmení</strong>,</>} name="surName" />
-        <TextInput label={<>a <strong>e-mail</strong>.</>} name="email" />
-        <OptionsInput
-          label="Přijedeš"
-          name="count"
-          type="radio"
-          options={[
-            {
-              label: "sám,",
-              value: Count.one
-            },
-            {
-              label: "s partnerem,",
-              value: Count.two
-            },
-            {
-              label: "nebo s rodinou?",
-              value: Count.more
-            }
-          ]}
-        />
-        {props.values?.count === "more" && <TextInput label="No a kolik vás teda bude?" name="familyCount" type="number" min={2} />}
-        <OptionsInput
-          label="S hostinou nám"
-          name="helpWithFood"
-          type="radio"
-          options={[
-            {
-              label: `${isAlone(props.values.count) ? "můžeš" : "můžete"} pomoct`,
-              value: "yes"
-            },
-            {
-              label: "nebo ne?",
-              value: "no"
-            }
-          ]}
-        />
-        {props.values?.helpWithFood === "yes" && (
+export const ParticipantForm: React.FC = () => {
+  const alert = useAlert()
+  return (
+    <Formik<Partial<ParticipantToRegister>>
+      initialValues={{
+        firstName: "",
+        surName: "",
+        email: "",
+        count: undefined,
+        familyCount: undefined,
+        helpWithFood: undefined,
+        kindOfFood: undefined,
+        kindOfFoodSpec: undefined,
+        arrival: undefined,
+        departure: undefined,
+        note: undefined
+      }}
+      validationSchema={schema}
+      onSubmit={async (values: Partial<ParticipantToRegister>) => {
+        const res = await fetch("/api/addParticipant", { method: "POST", body: JSON.stringify(values) })
+        if (res.status === 200) {
+          alert.success(`Hotovo. Těšíme se na ${values.count === Count.one ? "tebe" : "vás"}.`)
+        } else {
+          alert.error('Něco se nepovedlo. Zkus to ještě jednou, nebo nám napiš.')
+        }
+      }}
+    >
+      {props => (
+        <Form css={css`max-width: 300px`}>
+          <TextInput label={<>...jaké je tvé <strong>jméno</strong>,</>} name="firstName" disabled={props.isSubmitting} />
+          <TextInput label={<><strong>příjmení</strong>,</>} name="surName"  disabled={props.isSubmitting}/>
+          <TextInput label={<>a <strong>e-mail</strong>.</>} name="email"  disabled={props.isSubmitting}/>
           <OptionsInput
-            label={`A spíš se ${isAlone(props.values.count) ? "cítíš" : "cítíte"} na `}
-            name="kindOfFood"
+            label="Přijedeš"
+            name="count"
+            type="radio"
             options={[
               {
-                label: <><strong>salát</strong>,</>,
-                value: KindOfFood.Salad
+                label: "sám,",
+                value: Count.one
               },
               {
-                label: <>nějakou <strong>pomazánku</strong>,</>,
-                value: KindOfFood.Spread
+                label: "s partnerem,",
+                value: Count.two
               },
               {
-                label: <>nebo snad <strong>svatební koláčky</strong>,</>,
-                value: KindOfFood.Cakes
-              },
-              {
-                label: <>a nebo {isAlone(props.values.count) ? "bys" : "byste"} <strong>{isAlone(props.values.count) ? "upekl" : "upekly"} něco sladkého</strong>,</>,
-                value: KindOfFood.SweetBaking
-              },
-              {
-                label: <>nebo <strong>slaného</strong>,</>,
-                value: KindOfFood.SaldBaking
-              },
-              {
-                label: <>nebo {isAlone(props.values.count) ? "nasmažíš" : "nasmažíte"} <strong>řízky</strong>?</>,
-                value: KindOfFood.Steaks
-              },
-              {
-                label: <> A nebo {isAlone(props.values.count) ? "umíš" : "umíte"} nějakou <strong>specialitu</strong>, která na svatbě nesmí chybět?</>,
-                value: KindOfFood.Others
+                label: "nebo s rodinou?",
+                value: Count.more
               }
             ]}
+            disabled={props.isSubmitting}
           />
-        )}
-        {props.values?.helpWithFood === "yes" && props.values?.kindOfFood?.find(item => item === KindOfFood.Others) && <TextInput label="A jakou pak?" name="kindOfFoodSpec" />}
-        <OptionsInput
-          label={<>Dá by nás zajímalo, jestli {isAlone(props.values.count) ? "přijedeš" : "príjedete"}</>}
-          name="arrival"
-          type="radio"
-          options={[
-            {
-              label: "v pátek večer,",
-              value: Arrival.Friday
-            },
-            {
-              label: "nebo až v sobotu před obřadem.",
-              value: Arrival.Sunday
-            }
-          ]}
-        />
-        <OptionsInput
-          label={<>A taky jestli {isAlone(props.values.count) ? "plánuješ" : "plánujete"} odjet</>}
-          name="departure"
-          type="radio"
-          options={[
-            {
-              label: "hned po obřadu,",
-              value: Departure.SaturdayAm
-            },
-            {
-              label: "v sobotu odpoledne či večer,",
-              value: Departure.SaturdayPm
-            },
-            {
-              label: `nebo ${isAlone(props.values.count) ? "budeš" : "budete"} přes noc.`,
-              value: Departure.Sunday
-            },
-          ]}
-        />
-        <TextAreaInput label={<>Ještě něco nám {isAlone(props.values.count) ? "napiš" : "napište"}&hellip;</>} name="note" />
-        <button type="submit">Odeslat</button>
-      </Form>
-    )}
-  </Formik>
-)
+          {props.values?.count === "more" && <TextInput label="No a kolik vás teda bude?" name="familyCount" type="number" min={2} disabled={props.isSubmitting} />}
+          <OptionsInput
+            label="S hostinou nám"
+            name="helpWithFood"
+            type="radio"
+            options={[
+              {
+                label: `${isAlone(props.values.count) ? "můžeš" : "můžete"} pomoct`,
+                value: "yes"
+              },
+              {
+                label: "nebo ne?",
+                value: "no"
+              }
+            ]}
+            disabled={props.isSubmitting}
+          />
+          {props.values?.helpWithFood === "yes" && (
+            <OptionsInput
+              label={`A spíš se ${isAlone(props.values.count) ? "cítíš" : "cítíte"} na `}
+              name="kindOfFood"
+              options={[
+                {
+                  label: <><strong>salát</strong>,</>,
+                  value: KindOfFood.Salad
+                },
+                {
+                  label: <>nějakou <strong>pomazánku</strong>,</>,
+                  value: KindOfFood.Spread
+                },
+                {
+                  label: <>nebo snad <strong>svatební koláčky</strong>,</>,
+                  value: KindOfFood.Cakes
+                },
+                {
+                  label: <>a nebo {isAlone(props.values.count) ? "bys" : "byste"} <strong>{isAlone(props.values.count) ? "upekl" : "upekly"} něco sladkého</strong>,</>,
+                  value: KindOfFood.SweetBaking
+                },
+                {
+                  label: <>nebo <strong>slaného</strong>,</>,
+                  value: KindOfFood.SaldBaking
+                },
+                {
+                  label: <>nebo {isAlone(props.values.count) ? "nasmažíš" : "nasmažíte"} <strong>řízky</strong>?</>,
+                  value: KindOfFood.Steaks
+                },
+                {
+                  label: <> A nebo {isAlone(props.values.count) ? "umíš" : "umíte"} nějakou <strong>specialitu</strong>, která na svatbě nesmí chybět?</>,
+                  value: KindOfFood.Others
+                }
+              ]}
+              disabled={props.isSubmitting}
+            />
+          )}
+          {props.values?.helpWithFood === "yes" && props.values?.kindOfFood?.find(item => item === KindOfFood.Others) && <TextInput label="A jakou pak?" name="kindOfFoodSpec" disabled={props.isSubmitting} />}
+          <OptionsInput
+            label={<>Dál by nás zajímalo, jestli {isAlone(props.values.count) ? "přijedeš" : "príjedete"}</>}
+            name="arrival"
+            type="radio"
+            options={[
+              {
+                label: "v pátek večer,",
+                value: Arrival.Friday
+              },
+              {
+                label: "nebo až v sobotu před obřadem.",
+                value: Arrival.Sunday
+              }
+            ]}
+            disabled={props.isSubmitting}
+          />
+          <OptionsInput
+            label={<>A taky jestli {isAlone(props.values.count) ? "plánuješ" : "plánujete"} odjet</>}
+            name="departure"
+            type="radio"
+            options={[
+              {
+                label: "hned po obřadu,",
+                value: Departure.SaturdayAm
+              },
+              {
+                label: "v sobotu odpoledne či večer,",
+                value: Departure.SaturdayPm
+              },
+              {
+                label: `nebo ${isAlone(props.values.count) ? "budeš" : "budete"} přes noc.`,
+                value: Departure.Sunday
+              },
+            ]}
+            disabled={props.isSubmitting}
+          />
+          <TextInput type={"textarea"} label={<>Ještě něco nám {isAlone(props.values.count) ? "napiš" : "napište"}&hellip;</>} name="note" disabled={props.isSubmitting} />
+          <SubmitButton isSubmiting={props.isSubmitting}>Odeslat</SubmitButton>
+        </Form>
+      )}
+    </Formik>
+  )
+}

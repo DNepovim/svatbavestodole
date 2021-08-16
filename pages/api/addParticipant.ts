@@ -5,14 +5,8 @@ import { ParticipantToRegister } from "../../components/ParticipantForm/Particip
 import { NotReachableError } from "../../utils/notReachabelError"
 import * as Sentry from '@sentry/node'
 
-Sentry.init({
-  dsn: process.env.SENTRY_DSN,
-  tracesSampleRate: 1.0
-})
-
-
-type Data = {
-  name: string
+export class Success {
+  readonly status: number = 200
 }
 
 enum NotionFieldType {
@@ -45,24 +39,44 @@ interface ArrayFieldDef extends BaseFieldDef {
 
 type NotionFieldDef = TextFieldDef | NumberFieldDef | ArrayFieldDef
 
+const logError = (e: Error, req: NextApiRequest) => {
+    Sentry.init({
+      dsn: process.env.SENTRY_DSN,
+      tracesSampleRate: 1.0
+    })
+
+    Sentry.setTag("node_env", process.env.NODE_ENV)
+    Sentry.setTag("end", "backend")
+    if (req.body) {
+      Sentry.setContext("values", JSON.parse(req.body))
+    }
+    Sentry.setContext("headers", req.headers)
+    Sentry.captureEvent(e)
+}
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  if (!req.body) {
+    const e = new Error("The body of the request is empty.")
+    logError(e, req)
+    res.status(500).json(e)
+  }
   const parsedValues = JSON.parse(req.body) as ParticipantToRegister
   const fieldsDef = prepareData(parsedValues)
 
   try {
     await addRecordToNotion(fieldsDef)
-    res.status(200)
+    res.status(200).json(new Success())
   } catch (e) {
-    Sentry.setTag("node_env", process.env.NODE_ENV)
-    Sentry.setTag("end", "backend")
-    Sentry.setContext("values", parsedValues)
-    Sentry.setContext("headers", req.headers)
-    Sentry.captureEvent(e)
-    res.status(500).json(e)
+    if (e instanceof Error) {
+      logError(e, req)
+      res.status(500).json(e)
+    }
+    const error = new Error(e)
+    logError(error, req)
+    res.status(500).json(error)
   }
 }
 
