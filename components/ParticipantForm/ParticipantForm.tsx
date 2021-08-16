@@ -27,7 +27,7 @@ enum Arrival {
 
 enum Departure {
   SaturdayAm = "v sobotu po obřadu",
-  SaturdayPm = " v sobotu odpoledne",
+  SaturdayPm = "v sobotu odpoledne",
   Sunday = "v neděli"
 }
 
@@ -110,7 +110,7 @@ const FieldError: React.FC<{name: string}> = ({name}) => (
     css={css`
       color: red;
       font-size: 0.8rem;
-      height: 1rem
+      height: 1.2rem;
     `}
   >
     <ErrorMessage

@@ -10,6 +10,8 @@ import strom3 from '../images/strom3.jpg'
 import strom4 from '../images/strom4.jpg'
 import { ParticipantForm } from '../components/ParticipantForm/ParticipantForm'
 import { numberToTime } from '../utils/numberToTime'
+import ReactTooltip from 'react-tooltip'
+
 
 export const colors = {
   brand: "#298447",
@@ -80,27 +82,26 @@ const plan = [
   },
   {
     title: "Oběd",
-    description: "Pro svatebčany bude na kostelní zahradě připravený guláš, boršč a nějký ten salát aby nehladověli zatím co se rodina bude cpát na faře.",
+    description: "Pro svatebčany bude na kostelní zahradě připravený guláš, boršč a nějký ten salát aby nehladověli zatím co se rodina bude cpát na faře svíčkovou.",
   },
   {
     startTime: 15,
-    title: "Zakrojení dortu a zahájení zahradní slavnosti",
-    venue: Venues.courtyard
+    title: "Zakrojení dortu a zahájení zahradní slavnosti"
   },
   {
-    title: "Koncert Marie Bláhové a Radky Dimitrovové",
-    description: "Písnička, písnička, písnička...",
+    title: "Koncert v kostele",
+    description: "Marie Bláhová (v té době již Aniččina tchýně) a Radka Dimitrovová."
   },
   {
-    title: <A href="https://www.facebook.com/jinymetro/" targetBlank>Jiný metro</A>,
-    description: "Písnička, písnička, písnička...",
+    title: <A href="https://www.facebook.com/jinymetro/" targetBlank>Jiný metro</A>
   },
   {
     title: "Zakrojení divočáka"
   },
   {
     startTime: 20,
-    title: <A href="https://harmonikar.net/" targetBlank>Harmonikář Jindra Kelíšek hraje ke zpěvu i tanci</A>
+    title: "Tancování a tak",
+    description: <>Zahraje nám <A href="https://harmonikar.net/" targetBlank>harmonikář Jindra Kelíšek s kapelou</A>.</>
   },
   {
     startTime: 22,
@@ -108,8 +109,13 @@ const plan = [
   },
   {
     startTime: 9.5,
-    title: "Pravidelná nedělní bohoslužba v kostele"
+    title: "Nedělní bohoslužba"
+  },
+  {
+    title: "Velký úklid",
+    description: "Budeme rádi za vaší pomoc."
   }
+
 ]
 
 type TitleLevel = 1 | 2 | 3
@@ -172,6 +178,7 @@ const Section: React.FC<{title?: string}> = ({children, title}) => {
   )
 }
 
+export const Tooltip: React.FC<{tip: string}> = ({tip, children}) => <span data-for="main" data-tip={tip} data-iscapture="true">{children}</span>
 
 export default function Home() {
   const heading = "Svataba Aničky a Domínka"
@@ -187,6 +194,8 @@ export default function Home() {
         <meta name="msapplication-TileColor" content="#fff" />
         <meta name="theme-color" content={colors.brand}></meta>
         <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;600&display=swap" rel="stylesheed" />
+        <meta name="robots" content="noindex" />
+        <meta name="og:description" content="Máme se rádi a proto se budeme brát. Jestli nás máte také rádi, přijďte nám fandit." />
       </Head>
 
       <Global
@@ -213,50 +222,54 @@ export default function Home() {
           <Column span={1}>
             <Picture css={css`max-width: 100%;`} src={srcOznameni} alt="Kostel" />
             <p>Máme se rádi a proto se budeme brát. Jestli nás máte také rádi, přijďte nám fandit.</p>
-            <p>Oddá nás bratr farář a kamárd Ondřej Zikmund v <A href="https://mapy.cz/s/jafosomeso" targetBlank>malém evangelickém tolerančním kostele</A>  z konce 18. století, který leží na dohled od chaldících věží neratovické chemičky v přilehlé obci Libiš. Obřad bude součástí evangelické boshoslužby.</p>
+            <p>Oddá nás bratr farář a kamárd Ondřej Zikmund v <A href="https://mapy.cz/s/jafosomeso" targetBlank>malém evangelickém tolerančním kostele</A>  z konce 18. století, který leží na dohled od chaldících věží neratovické chemičky v přilehlé obci Libiš.</p>
           </Column>
           <Column>
             <Title level={2} image={strom1}>Dostanete se k nám&hellip;</Title>
             <p>&hellip;po svých, na kole, či na koni. Jste-li z daleka, nevěste hlavu. 50 metrů od kostela je autobusová zastávka <A href="https://mapy.cz/s/damevemuke" targetBlank>Libiš, obec</A>, kam jezdí <A href="https://idos.idnes.cz/vlakyautobusymhdvse/spojeni/?byarr=true&t=Libi%C5%A1,,obec&date=4.9.2021&time=10:30" targetBlank>každou hodinu přímý autobus z Prahy</A>. A na zastávku <A href="https://mapy.cz/s/padubabeju" targetBlank>Libiš</A>, která je od kostela vzdálená 350 metrů, jezdí <A href="https://idos.idnes.cz/vlakyautobusymhdvse/spojeni/?byarr=true&t=Libi%C5%A1&date=4.9.2021&time=10:30" targetBlank>každou půl hodinu</A>. Máte-li raději vlaky, budete to mít s dvoukilometrovou procházkou z Neratovic. Projdete si tak trasu, kterou chodil Dominik s rodiči, když byl malým chlapcem, každou neděli. Doporučuji, ale jít <A href="https://mapy.cz/s/bevonafuse" targetBlank>delší a hezčí tříkilometrovou trasou</A>. Jak snad víte, autům příliš neholdujeme a neradi bychom, aby naše svatba způsobila dopravní kalamitu v ulici před kostelem. Jeli to však jediná možnost, a my chápeme, že to je občas nevyhnutelné, zaparkovat by mělo být možné v okolních ulicích. Helikoptéry mohou přistávat na nedalekém fotbalovém hřišti.</p>
-
-            {/* <a href="https://mapy.cz/s/hufukelenu" target="_blank" rel="noreferrer">
-              <Picture css={css`max-height: 100%`} src={scrMapa} onHoverSrc={srcMapa2} alt="Mapa" />
-            </a> */}
           </Column>
           <Column>
-            <Title level={2} image={strom2}>Co nám dát...</Title>
-            <p>&hellip;nic a nebo něco. Je to klišé, ale největším darem pro nás bude, když přijedete a budete tam s námi. A pokud se vám nechce přijet s prázdnou, tak nám pomozte se svatební hostinou. Ale klidně přijeďte s prázdnou. Speciální dary, ani peníze nepotřebujeme. Žijeme celkem nenákladný život, tučně dotovaný jedním nadnárodním korporátem, hypotéku neplánujeme a vrtačku i mixér už máme. Pokud vás ale pálí peníze v kapse a chcete nám udělat radost, tak přispějte na některou z našich oblíbených charitativních organizací a napište nám o tom do svatební knihy, nebo nám tam na památku vlepte potvrzení.</p>
+            <Title level={2} image={strom3}>Na sebe si vezměte&hellip;</Title>
+            <p>&hellip;něco. Prosím. Cokoli.</p>
+            <p>Chcete-li však zapadnout do svatební vřavy, oblečte si šaty, či oblek. Necete-li do zmiňované vřavy zapadnout, oblečte si co chcete. Odpolední zahradní slavnost bude probíhat&hellip; &hellip; na zahradě. Asi to nebude na vysoké podpadky.</p>
+          </Column>
+          <Column>
+            <Title level={2} image={strom1}>A kdybyste měli hlad&hellip;</Title>
+            <p>&hellip;tak jste si asi spletli svatbu. Na té naší se můžete hned po bohoslužbě těšit na pořádný oběd na zahradě přímo u kostela na stoly prohýbající se pod tíhou jídla a pití.</p>
+            <p>Budeme moc rádi, pokud na odpolední raut přispějete něčím drobným, nebo i méně drobným, co uvaříte, upečete nebo natrháte doma. Může to být cokoli – sladké, slané, jídlo, pití&hellip; Když do formuláře s účastí vyplníte, co byste mohli na raut připravit, ozve se vám Eliška a domluví se s vámi.</p>
+            <p>A protože chceme mít na svatbě víc jídla, než odpadků, nenajdete na ní jednorázové nádobí a vícerázového bude pomálu. Přivezte si tedy vlastní jídelní náčiní. Doporučujeme misku, sklenici a příbory. Určitě si sbalte i krabičku a láhev na svačinu na cestu.</p>
+          </Column>
+          <Column>
+            <Title level={2} image={strom2}>Dejte nám...</Title>
+            <p>&hellip;nic a nebo něco. Je to klišé, ale největším darem pro nás bude, když přijedete a budete tam s námi. A pokud se vám nechce přijet s prázdnou, tak nám pomozte se svatební hostinou. Ale klidně přijeďte s prázdnou. Speciální dary, ani peníze nepotřebujeme. Žijeme celkem nenákladný život, tučně dotovaný <Tooltip tip="🥕">nadnárodním korporátem</Tooltip>, hypotéku neplánujeme a vrtačku i mixér už máme. Pokud vás ale pálí peníze v kapse a chcete nám udělat radost, tak přispějte na některou z našich oblíbených charitativních organizací a napište nám o tom do svatební knihy, nebo nám tam na památku vlepte nějaký doklad.</p>
+            <p>Tady je pár tipů:</p>
             <ul>
               <li><strong><A href="https://www.dobryandel.cz/jak-pomahat/#tabs-1-3" targetBlank>Dobrý anděl</A></strong> pomáhá rodinám nemocných dětí.</li>
-              <li>Můžete podpořit <strong><A href="https://klublinkyvbezpeci.cz/podporte-nas/halo" targetBlank>Linku bezpečí</A></strong>, která se snaží pomáhat dětem dětem, které něco trápí.</li>
+              <li>Můžete podpořit <strong><A href="https://klublinkyvbezpeci.cz/podporte-nas/halo" targetBlank>Linku bezpečí</A></strong>, která se snaží pomáhat dětem, které něco trápí.</li>
               <li><strong><A href="http://www.fod.cz/nase-cinnost/klokanek" targetBlank>Fond ohrožených dětí – Klokánek</A></strong> se snaží zajistit dětem domov na přechodnou dobu.</li>
-              <li><strong><A href="https://www.darujme.cz/projekt/1204009" targetBlank>Samoživitelé či samoživitelky</A></strong> to mají těžké i když zrovna není pandemie. Můžete jim přispět tady: .</li>
+              <li><strong><A href="https://www.darujme.cz/projekt/1204009" targetBlank>Samoživitelé či samoživitelky</A></strong> to mají těžké i když zrovna není pandemie.</li>
               <li>Fanoušci zvířat můžou přispět organizaci <strong><A href="https://www.darujme.cz/projekt/853" targetBlank>Psí život</A></strong>, která se věnuje pomoci zvířatům lidí bez domova.</li>
               <li><strong><A href="https://www.darujme.cz/projekt/1201840" targetBlank>Potravinové banky</A></strong> se snaží dostat potraviny k těm, kteří to potřebují.</li>
               <li><strong><A href="https://www.darujme.cz/projekt/876" targetBlank>Paměť národa</A></strong> dokumentuje historii a snaží se, abychom na ni nezapomněli.</li>
             </ul>
           </Column>
           <Column>
-            <Title level={2} image={strom3}>Na sebe si vezměte&hellip;</Title>
-            <p>&hellip;něco. Prosím. Cokoli.</p>
-            <p>Chcete-li však zapadnout do svatební vřavy, oblečte si šaty, či oblek. Necete-li do zmiňované vřavy zapadnout, oblečte si co chcete.</p>
+            <Title level={2}>Spát budete moct&hellip;</Title>
+            <p>&hellip;v pižamu, noční košili, či spodním prádle. Fara má střechu a pod ní podlahu, kam si můžete položit karimatku a spacák. Fara má i zahradu, kde si můžete postavit stan, bivak či se jen opřít o strom a posunout si do čela své sombréro.</p>
+            <p>Budeme rádi, když s námi v Libiši strávíte noc a ještě radši, když nám druhý den pomůžete s úklidem.</p>
           </Column>
           <Column>
-            <Title level={2} image={strom1}>A kdybyste měli hlad&hellip;</Title>
-            <p>&hellip;tak jste si asi spletli svatbu. Na té naší se můžete po hned po bohoslužbě těšit na pořádný oběd na zahradě přímo u kostela, následovaný stoly prohýbajícími se pod tíhou nejrůznějšího jídla a pití.</p>
-            <p>Budeme moc rádi, pokud na odpolední raut přispějete něčím drobným, nebo i méně drobným, co uvaříte, upečete nebo natrháte doma. Může to být cokoli – sladké, slané, jídlo, pití&hellip; Když do formuláře s účastí vyplníte, co byste mohli na raut připravit, ozve se vám Eliška a domluví se s vámi.</p>
-            <p>A protože chceme mít na svatbě víc jídla, než odpadků, nenajdete na ní jednorázové nádobí a vícerázového bude pomálu. Přivezte si tedy vlastní jídelní náčiní. Doporučujeme misku, sklenici a příbory. Určitě si sbalte i krabičku a láhev na svačinu na cestu.</p>
-          </Column>
-          <Column>
-            <Title level={2}>S sebou</Title>
-            TODO
-            <p> Vlastní jídelní servis (sklenici, talíř či misku a příbor)
-            Krabičku a lahev na svačinu na cestu
-            Věci na spaní (spacák, karimatku, případně stan)
-            Hudebni nastroje</p>
+            <Title level={2}>S sebou si přivezte&hellip;</Title>
+            <ul>
+              <li>vlastní jídelní servis (sklenici, talíř či misku a příbor),</li>
+              <li>krabičku a lahev na svačinu na cestu,</li>
+              <li>věci na spaní (spacák, karimatku, případně stan),</li>
+              <li>hudebni nástroje.</li>
+            </ul>
           </Column>
           <Column span={2}>
-            <Title level={2} image={strom1}>Program</Title>
+            <Title level={2} image={strom1}>Takhle jsme to naplánovali&hellip;</Title>
+            <p>&hellip;ale víte jak&hellip;</p>
             <table>
               <tbody>
                 {plan.map((item, index) => (
@@ -270,6 +283,7 @@ export default function Home() {
                 ))}
               </tbody>
             </table>
+            <p>Chcete-li také něčím vykutálným přispět do programu, <A href="mailto:nik@skaut.cz" targetBlank>napište ženichovy</A>.</p>
           </Column>
           <Column span={3}>
             <Title level={2} image={strom4}>Dejte nám vědět&hellip;</Title>
@@ -277,6 +291,7 @@ export default function Home() {
           </Column>
         </Section>
       </main>
+      <ReactTooltip id="main" />
     </div>
   )
 }
