@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React, { ReactNode } from "react"
 import * as yup from 'yup'
-import { Formik, Form, Field, ErrorMessage } from "formik"
+import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik"
 import { css } from "@emotion/react"
 import { colors } from "../../pages"
 import strom4 from '../../images/strom4.jpg'
@@ -238,11 +238,12 @@ export const ParticipantForm: React.FC = () => {
         note: undefined
       }}
       validationSchema={schema}
-      onSubmit={async (values: Partial<ParticipantToRegister>) => {
+      onSubmit={async (values: Partial<ParticipantToRegister>, formikHelpers: FormikHelpers<Partial<ParticipantToRegister>>) => {
         const res = await fetch("/api/addParticipant", { method: "POST", body: JSON.stringify(values) })
         analytics.track('formSubmited', values)
         if (res.status === 200) {
           alert.success(`Hotovo. Těšíme se na ${values.count === Count.one ? "tebe" : "vás"}.`)
+          formikHelpers.resetForm()
         } else {
           alert.error('Něco se nepovedlo. Zkus to ještě jednou, nebo nám napiš.')
         }
