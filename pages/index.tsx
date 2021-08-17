@@ -229,7 +229,7 @@ export default function Home() {
           <Column span={1}>
             <Picture css={css`max-width: 100%;`} src={srcOznameni} alt="Kostel" />
             <p>Máme se rádi, a proto se budeme brát. Jestli nás máte také rádi, přijďte nám fandit.</p>
-            <p>Bohoslužba, jejíž bude svatební obřad součástí, začne 4. 9. v 11:00 v&nbsp;<A href="https://mapy.cz/s/jafosomeso" targetBlank>malém evangelickém kostele</A>, který leží na dohled od chaldících věží neratovické chemičky v přilehlé obci Libiš, a povede ji bratr farář a kamárd Ondřej Zikmund.</p>
+            <p>Bohoslužba, jejíž bude svatební obřad součástí, začne 4. 9. v 11:00 v&nbsp;<A href="https://mapy.cz/s/jafosomeso" targetBlank>malém evangelickém kostele</A>, který leží na dohled od chladících věží neratovické chemičky v přilehlé obci Libiš, a povede ji bratr farář a kamárd Ondřej Zikmund.</p>
             <p>Libišský kostel byl postaven krátce po vydání tolerančního patentu, kdy byla činnost protestantských církví sice již legální, ale stále omezena mnoha dalšími patenty. Protestantské kostely nesměly mít věže, klenutá okna a nesměli mít vchod do hlavní ulice. Hledejte tedy spíš honosnou stodolu, než okázalý chrám.</p>
           </Column>
           <Column>
@@ -291,14 +291,14 @@ export default function Home() {
                 ))}
               </tbody>
             </table>
-            <p>Chcete-li také něčím vykutálným přispět do programu, <A href="mailto:nik@skaut.cz" targetBlank>napište ženichovy</A>.</p>
+            <p>Chcete-li také něčím vykutáleným přispět do programu, <A href="mailto:nik@skaut.cz" targetBlank>napište ženichovy</A>.</p>
           </Column>
           <Column>
             <Title image={strom1} level={2}>Virus&hellip;</Title>
             <p>&hellip; stále řádí v našich krajinách. Naštěstí je před volbami a tak nečekáme nějaké nepopulární restrikce. Dá se očekávat, že bude třeba <A href="https://covid.gov.cz/situace/zivotni-udalosti/svatba" targetBlank>dokládat bezinfekčnost</A>. Kontrolovat to nebudeme, ale prosíme o odpovědnost. Přece jen čekáme spoustu lidí a ne všichni jsou mladí a zdraví.</p>
           </Column>
           <Column span={3}>
-            <Title level={2} image={strom4}>Dejte nám vědět&hellip;</Title>
+            <Title level={2} image={strom4}>Dej nám vědět&hellip;</Title>
             <ParticipantForm />
           </Column>
           <Column>
