@@ -70,7 +70,7 @@ const A: React.FC<{href: string; targetBlank?: true}> = ({children, href, target
 const plan = [
   {
     startTime: 11,
-    title: "Obřad",
+    title: "Bohoslužba a obřad",
 
   },
   {
@@ -78,7 +78,7 @@ const plan = [
   },
   {
     title: "Oběd",
-    description: "Pro svatebčany bude na kostelní zahradě připravený guláš, boršč a nějký ten salát aby nehladověli zatím co se rodina bude cpát na faře svíčkovou.",
+    description: "Pro svatebčany bude na kostelní zahradě připravený guláš, boršč a nějký ten salát aby nehladověli zatím co se rodina bude cpát na faře svíčkovou",
   },
   {
     startTime: 15,
@@ -86,7 +86,11 @@ const plan = [
   },
   {
     title: "Koncert v kostele",
-    description: "Marie Bláhová (v té době již Aniččina tchýně) a Radka Dimitrovová."
+    description: "Marie Bláhová (v té době již Aniččina tchýně) a Radka Dimitrovová"
+  },
+  {
+    title: "Loutkové divadlo",
+    description: "Pro děti i rodiče"
   },
   {
     title: <A href="https://www.facebook.com/jinymetro/" targetBlank>Jiný metro</A>
@@ -97,11 +101,12 @@ const plan = [
   {
     startTime: 20,
     title: "Tancování a tak",
-    description: <>Zahraje nám <A href="https://harmonikar.net/" targetBlank>harmonikář Jindra Kelíšek s kapelou</A>.</>
+    description: <>Zahraje nám <A href="https://harmonikar.net/" targetBlank>harmonikář Jindra Kelíšek s kapelou</A></>
   },
   {
     startTime: 22,
-    title: "Ještě volnější zábava"
+    title: "Ještě volnější zábava",
+    description: "Čas vytáhnout své hudební nástroje"
   },
   {
     startTime: 9.5,
@@ -109,7 +114,7 @@ const plan = [
   },
   {
     title: "Velký úklid",
-    description: "Budeme rádi za vaší pomoc."
+    description: "Budeme rádi za vaší pomoc"
   }
 
 ]
@@ -218,7 +223,8 @@ export default function Home() {
           <Column span={1}>
             <Picture css={css`max-width: 100%;`} src={srcOznameni} alt="Kostel" />
             <p>Máme se rádi a proto se budeme brát. Jestli nás máte také rádi, přijďte nám fandit.</p>
-            <p>Oddá nás bratr farář a kamárd Ondřej Zikmund v&nobsp;<A href="https://mapy.cz/s/jafosomeso" targetBlank>malém evangelickém tolerančním kostele</A> z konce 18. století, který leží na dohled od chaldících věží neratovické chemičky v přilehlé obci Libiš.</p>
+            <p>Bohoslužba, jejíž bude svatební obřad součástí začne 4. 9. v 11:00 v&nbsp;<A href="https://mapy.cz/s/jafosomeso" targetBlank>malém evangelickém kostele</A>, který leží na dohled od chaldících věží neratovické chemičky v přilehlé obci Libiš a povede ji bratr farář a kamárd Ondřej Zikmund.</p>
+            <p>Libišský kostel byl postaven krátce po vydání tolerančního patentu, kdy byla činnost protestantských církví sice již legální, ale stále omezena mnoha dalšími patenty. Protestantské kostely nesměli mít věže, klenutá okna a nesměli mít vchod do hlavní ulice. Hledejte tedy spíš honosnou stodolu, než okázalý chrám.</p>
           </Column>
           <Column>
             <Title level={2} image={strom1}>Dostanete se k nám&hellip;</Title>
@@ -227,12 +233,12 @@ export default function Home() {
           <Column>
             <Title level={2} image={strom3}>Na sebe si vezměte&hellip;</Title>
             <p>&hellip;něco. Prosím. Cokoli.</p>
-            <p>Chcete-li však zapadnout do svatební vřavy, oblečte si šaty, či oblek. Necete-li do zmiňované vřavy zapadnout, oblečte si co chcete. Odpolední zahradní slavnost bude probíhat&hellip; &hellip; na zahradě. Asi to nebude na vysoké podpadky.</p>
+            <p>Chcete-li však zapadnout do svatební vřavy, oblečte si šaty, či oblek. Nechcete-li však do zmiňované vřavy zapadnout, oblečte si co chcete. Odpolední zahradní slavnost bude probíhat&hellip; &hellip;na zahradě. Asi to nebude na vysoké podpatky.</p>
           </Column>
           <Column>
             <Title level={2} image={strom1}>A kdybyste měli hlad&hellip;</Title>
-            <p>&hellip;tak jste si asi spletli svatbu. Na té naší se můžete hned po bohoslužbě těšit na pořádný oběd na zahradě přímo u kostela na stoly prohýbající se pod tíhou jídla a pití.</p>
-            <p>Budeme moc rádi, pokud na odpolední raut přispějete něčím drobným, nebo i méně drobným, co uvaříte, upečete nebo natrháte doma. Může to být cokoli—sladké, slané, jídlo, pití&hellip; Když do formuláře s účastí vyplníte, co byste mohli na raut připravit, ozve se vám Eliška a domluví se s vámi.</p>
+            <p>&hellip;tak jste si asi spletli svatbu. Na té naší se můžete hned po bohoslužbě těšit na pořádný oběd na zahradě přímo u kostela na stoly prohýbající se pod tíhou jídla a pití až do noci.</p>
+            <p>Budeme moc rádi, pokud na odpolední raut přispějete něčím drobným, nebo i méně drobným, co uvaříte, upečete nebo natrháte doma. Může to být cokoli. Sladké, slané, jídlo, pití&hellip; Když do formuláře s účastí vyplníte, co byste mohli na raut připravit, ozve se vám Eliška a domluví se s vámi.</p>
             <p>A protože chceme mít na svatbě víc jídla, než odpadků, nenajdete na ní jednorázové nádobí a vícerázového bude pomálu. Přivezte si tedy vlastní jídelní náčiní. Doporučujeme misku, sklenici a příbory. Určitě si sbalte i krabičku a láhev na svačinu na cestu.</p>
           </Column>
           <Column>
@@ -255,7 +261,7 @@ export default function Home() {
             <p>Budeme rádi, když s námi v Libiši strávíte noc a ještě radši, když nám druhý den pomůžete s úklidem.</p>
           </Column>
           <Column>
-            <Title level={2}>S sebou si přivezte&hellip;</Title>
+            <Title level={2} image={strom1}>S sebou si přivezte&hellip;</Title>
             <ul>
               <li>vlastní jídelní servis (sklenici, talíř či misku a příbor),</li>
               <li>krabičku a lahev na svačinu na cestu,</li>
@@ -283,16 +289,15 @@ export default function Home() {
           </Column>
           <Column>
             <Title image={strom1} level={2}>Virus&hellip;</Title>
-            <p>&hellip; stále řádí v našich krjinách. Naštěstí je před volbami a tak nečekáme nějaké nepopulární restrikce. Dá se očekávat, že bude třeba <A href="https://covid.gov.cz/situace/zivotni-udalosti/svatba" targetBlank>dokládat bezinfekčnost</A>. Kontrolovat to nebudeme, ale prosíme o odpovědnost. Přece jen čekáme spoustu lidí a ne všichni jsou mladí a zdraví.</p>
-            <p>Ale nemějte obavy. Na místě bude elitní tým antivirových specialistů.</p>
+            <p>&hellip; stále řádí v našich krajinách. Naštěstí je před volbami a tak nečekáme nějaké nepopulární restrikce. Dá se očekávat, že bude třeba <A href="https://covid.gov.cz/situace/zivotni-udalosti/svatba" targetBlank>dokládat bezinfekčnost</A>. Kontrolovat to nebudeme, ale prosíme o odpovědnost. Přece jen čekáme spoustu lidí a ne všichni jsou mladí a zdraví.</p>
           </Column>
           <Column span={3}>
             <Title level={2} image={strom4}>Dejte nám vědět&hellip;</Title>
             <ParticipantForm />
           </Column>
           <Column>
-            <Title image={strom3} level={2}>Není-li vám něco jasné,&hellip;</Title>
-            <p>&hellip;tak si přečtěte ještě jednou náš web, pak se pořádně zamyslete a pokud ani to to nepomůže, přistupte ke krajní možnosti, kterou je<A href="mailto:nik@skaut.cz" targetBlank>napsání ženichovy na mail nik@skaut.cz</A>.</p>
+            <Title image={strom3} level={2}>Máte-li dotaz&hellip;</Title>
+            <p>&hellip;a jste si jistí, že na něj nenajdete odpověď na tomto webu, <A href="mailto:nik@skaut.cz" targetBlank> napište ženichovy na mail nik@skaut.cz</A>.</p>
           </Column>
         </Section>
       </main>
