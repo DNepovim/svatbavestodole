@@ -53,7 +53,7 @@ export interface ParticipantToRegister {
 const schema = yup.object().shape({
   firstName: yup.string().required("Vyplň své jméno."),
   surName: yup.string().required("Vyplň své příjmení."),
-  email: yup.string().email("E-mail není vyplněn správně.").required("Vyplň svůj e-mail."),
+  email: yup.string().trim().email("E-mail není vyplněn správně.").required("Vyplň svůj e-mail."),
   count: yup.string().required("Vyplň kolik vás přijede."),
   familyCount: yup.mixed().when(["count"], {
     is: "more",
@@ -220,6 +220,10 @@ const SubmitButton:React.FC<{isSubmiting?: boolean}> = ({children, isSubmiting})
 
 const isAlone = (count?: Count): boolean => !count || count === Count.one
 
+function isString(x: any): x is string {
+  return typeof x === "string";
+}
+
 export const ParticipantForm: React.FC = () => {
   const alert = useAlert()
   return (
@@ -235,10 +239,11 @@ export const ParticipantForm: React.FC = () => {
         kindOfFoodSpec: undefined,
         arrival: undefined,
         departure: undefined,
-        note: undefined
+        note: ""
       }}
       validationSchema={schema}
       onSubmit={async (values: Partial<ParticipantToRegister>, formikHelpers: FormikHelpers<Partial<ParticipantToRegister>>) => {
+        const sanitizedValues = Object.entries(values).reduce((acc, [key, value]) => ({...acc, [key]: isString(value) ? value.trim() : value }),{})
         const res = await fetch("/api/addParticipant", { method: "POST", body: JSON.stringify(values) })
         analytics.track('formSubmited', values)
         if (res.status === 200) {
