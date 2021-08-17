@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { css, Global, SerializedStyles } from '@emotion/react'
 import Head from 'next/head'
 import Image from 'next/image'
@@ -11,6 +11,7 @@ import strom4 from '../images/strom4.jpg'
 import { ParticipantForm } from '../components/ParticipantForm/ParticipantForm'
 import { numberToTime } from '../utils/numberToTime'
 import ReactTooltip from 'react-tooltip'
+import { analytics } from '../utils/analytics'
 
 
 
@@ -183,6 +184,11 @@ export const Tooltip: React.FC<{tip: string}> = ({tip, children}) => <span data-
 
 export default function Home() {
   const heading = "Svataba Aničky a Domínka"
+
+  useEffect(() => {
+    analytics.page()
+  })
+
   return (
     <div>
       <Head>

@@ -7,6 +7,7 @@ import { colors } from "../../pages"
 import strom4 from '../../images/strom4.jpg'
 import Image from 'next/image'
 import { useAlert } from 'react-alert'
+import { analytics } from "../../utils/analytics"
 
 enum KindOfFood {
   Salad = "salát",
@@ -239,6 +240,7 @@ export const ParticipantForm: React.FC = () => {
       validationSchema={schema}
       onSubmit={async (values: Partial<ParticipantToRegister>) => {
         const res = await fetch("/api/addParticipant", { method: "POST", body: JSON.stringify(values) })
+        analytics.track('formSubmited', values)
         if (res.status === 200) {
           alert.success(`Hotovo. Těšíme se na ${values.count === Count.one ? "tebe" : "vás"}.`)
         } else {
