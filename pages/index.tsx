@@ -228,9 +228,9 @@ export default function Home() {
         <Section>
           <Column span={1}>
             <Picture css={css`max-width: 100%;`} src={srcOznameni} alt="Kostel" />
-            <p>Máme se rádi a proto se budeme brát. Jestli nás máte také rádi, přijďte nám fandit.</p>
-            <p>Bohoslužba, jejíž bude svatební obřad součástí začne 4. 9. v 11:00 v&nbsp;<A href="https://mapy.cz/s/jafosomeso" targetBlank>malém evangelickém kostele</A>, který leží na dohled od chaldících věží neratovické chemičky v přilehlé obci Libiš a povede ji bratr farář a kamárd Ondřej Zikmund.</p>
-            <p>Libišský kostel byl postaven krátce po vydání tolerančního patentu, kdy byla činnost protestantských církví sice již legální, ale stále omezena mnoha dalšími patenty. Protestantské kostely nesměli mít věže, klenutá okna a nesměli mít vchod do hlavní ulice. Hledejte tedy spíš honosnou stodolu, než okázalý chrám.</p>
+            <p>Máme se rádi, a proto se budeme brát. Jestli nás máte také rádi, přijďte nám fandit.</p>
+            <p>Bohoslužba, jejíž bude svatební obřad součástí, začne 4. 9. v 11:00 v&nbsp;<A href="https://mapy.cz/s/jafosomeso" targetBlank>malém evangelickém kostele</A>, který leží na dohled od chaldících věží neratovické chemičky v přilehlé obci Libiš, a povede ji bratr farář a kamárd Ondřej Zikmund.</p>
+            <p>Libišský kostel byl postaven krátce po vydání tolerančního patentu, kdy byla činnost protestantských církví sice již legální, ale stále omezena mnoha dalšími patenty. Protestantské kostely nesměly mít věže, klenutá okna a nesměli mít vchod do hlavní ulice. Hledejte tedy spíš honosnou stodolu, než okázalý chrám.</p>
           </Column>
           <Column>
             <Title level={2} image={strom1}>Dostanete se k nám&hellip;</Title>
@@ -243,7 +243,7 @@ export default function Home() {
           </Column>
           <Column>
             <Title level={2} image={strom1}>A kdybyste měli hlad&hellip;</Title>
-            <p>&hellip;tak jste si asi spletli svatbu. Na té naší se můžete hned po bohoslužbě těšit na pořádný oběd na zahradě přímo u kostela na stoly prohýbající se pod tíhou jídla a pití až do noci.</p>
+            <p>&hellip;tak jste si asi spletli svatbu. Na té naší se můžete hned po bohoslužbě těšit na pořádný oběd na zahradě přímo u kostela a na stoly prohýbající se pod tíhou jídla a pití až do noci.</p>
             <p>Budeme moc rádi, pokud na odpolední raut přispějete něčím drobným, nebo i méně drobným, co uvaříte, upečete nebo natrháte doma. Může to být cokoli. Sladké, slané, jídlo, pití&hellip; Když do formuláře s účastí vyplníte, co byste mohli na raut připravit, ozve se vám Eliška a domluví se s vámi.</p>
             <p>A protože chceme mít na svatbě víc jídla, než odpadků, nenajdete na ní jednorázové nádobí a vícerázového bude pomálu. Přivezte si tedy vlastní jídelní náčiní. Doporučujeme misku, sklenici a příbory. Určitě si sbalte i krabičku a láhev na svačinu na cestu.</p>
           </Column>
