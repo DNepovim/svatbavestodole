@@ -263,7 +263,7 @@ export default function Home() {
           </Column>
           <Column>
             <Title level={2} image={strom3}>Spát budete moct&hellip;</Title>
-            <p>&hellip;v pižamu, noční košili, či spodním prádle. Fara má střechu a pod ní podlahu, kam si můžete položit karimatku a spacák. Fara má i zahradu, kde si můžete postavit stan, bivak či se jen opřít o strom a posunout si do čela své sombréro.</p>
+            <p>&hellip;v pyžamu, noční košili, či spodním prádle. Fara má střechu a pod ní podlahu, kam si můžete položit karimatku a spacák. Fara má i zahradu, kde si můžete postavit stan, bivak či se jen opřít o strom a posunout si do čela své sombréro.</p>
             <p>Budeme rádi, když s námi v Libiši strávíte noc a ještě radši, když nám druhý den pomůžete s úklidem.</p>
           </Column>
           <Column>
