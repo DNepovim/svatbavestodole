@@ -230,7 +230,7 @@ export default function Home() {
             <Picture css={css`max-width: 100%;`} src={srcOznameni} alt="Kostel" />
             <p>Máme se rádi, a proto se budeme brát. Jestli nás máte také rádi, přijďte nám fandit.</p>
             <p>Bohoslužba, jejíž bude svatební obřad součástí, začne 4. 9. v 11:00 v&nbsp;<A href="https://mapy.cz/s/jafosomeso" targetBlank>malém evangelickém kostele</A>, který leží na dohled od chladících věží neratovické chemičky v přilehlé obci Libiš, a povede ji bratr farář a kamárd Ondřej Zikmund.</p>
-            <p>Libišský kostel byl postaven krátce po vydání tolerančního patentu, kdy byla činnost protestantských církví sice již legální, ale stále omezena mnoha dalšími patenty. Protestantské kostely nesměly mít věže, klenutá okna a nesměli mít vchod do hlavní ulice. Hledejte tedy spíš honosnou stodolu, než okázalý chrám.</p>
+            <p>Libišský kostel byl postaven krátce po vydání tolerančního patentu, kdy byla činnost protestantských církví sice již legální, ale stále omezena mnoha dalšími patenty. Protestantské kostely nesměly mít věže, klenutá okna a nesměly mít vchod do hlavní ulice. Hledejte tedy spíš honosnou stodolu, než okázalý chrám.</p>
           </Column>
           <Column>
             <Title level={2} image={strom1}>Dostanete se k nám&hellip;</Title>
