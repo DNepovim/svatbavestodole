@@ -335,7 +335,7 @@ export const ParticipantForm: React.FC = () => {
           )}
           {props.values?.helpWithFood === "yes" && props.values?.kindOfFood?.find(item => item === KindOfFood.Others) && <TextInput label="A jakou pak?" name="kindOfFoodSpec" disabled={props.isSubmitting} />}
           <OptionsInput
-            label={<>Dál by nás zajímalo, jestli {isAlone(props.values.count) ? "přijedeš" : "príjedete"}</>}
+            label={<>Dál by nás zajímalo, jestli {isAlone(props.values.count) ? "přijedeš" : "přijedete"}</>}
             name="arrival"
             type="radio"
             options={[
