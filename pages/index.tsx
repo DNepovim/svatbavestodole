@@ -183,7 +183,7 @@ const Section: React.FC<{title?: string}> = ({children, title}) => {
 export const Tooltip: React.FC<{tip: string}> = ({tip, children}) => <span data-for="main" data-tip={tip} data-iscapture="true">{children}</span>
 
 export default function Home() {
-  const heading = "Svataba Aničky a Domínka"
+  const heading = "Svatba Aničky a Dominika"
 
   useEffect(() => {
     analytics.page()
