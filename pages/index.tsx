@@ -291,7 +291,7 @@ export default function Home() {
                 ))}
               </tbody>
             </table>
-            <p>Chcete-li také něčím vykutáleným přispět do programu, <A href="mailto:nik@skaut.cz" targetBlank>napište ženichovy</A>.</p>
+            <p>Chcete-li také něčím vykutáleným přispět do programu, <A href="mailto:nik@skaut.cz" targetBlank>napište ženichovi</A>.</p>
           </Column>
           <Column>
             <Title image={strom1} level={2}>Virus&hellip;</Title>
@@ -303,7 +303,7 @@ export default function Home() {
           </Column>
           <Column>
             <Title image={strom3} level={2}>Máte-li dotaz&hellip;</Title>
-            <p>&hellip;a jste si jistí, že na něj nenajdete odpověď na tomto webu, <A href="mailto:nik@skaut.cz" targetBlank> napište ženichovy na mail nik@skaut.cz</A>.</p>
+            <p>&hellip;a jste si jistí, že na něj nenajdete odpověď na tomto webu, <A href="mailto:nik@skaut.cz" targetBlank> napište ženichovi na mail nik@skaut.cz</A>.</p>
           </Column>
         </Section>
       </main>
