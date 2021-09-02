@@ -97,9 +97,6 @@ const plan = [
     title: <A href="https://www.facebook.com/jinymetro/" targetBlank>Jiný metro</A>
   },
   {
-    title: "Zakrojení divočáka"
-  },
-  {
     startTime: 20,
     title: "Tancování a tak",
     description: <>Zahraje nám <A href="https://harmonikar.net/" targetBlank>harmonikář Jindra Kelíšek s kapelou</A></>
