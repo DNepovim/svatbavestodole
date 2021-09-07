@@ -140,7 +140,7 @@ export const TextInput: React.FC<FieldProps> = ({ label, name, type, disabled}) 
         }
       `}
       name={name}
-      disabled={disabled}
+      disabled={disabled || disabled}
     />
     <FieldError name={name} />
   </Fieldset>
@@ -153,7 +153,7 @@ const OptionsInput: React.FC<FieldProps & { options: Option[] }> = ({label, opti
       {label && <Label name={props.name}>{label}</Label>}
       {options.map(({label, value}) => (
         <React.Fragment key={`${props.name}-${value}`}>
-          <Field id={`${props.name}-${value}`} css={css`display: none`} type={type} name={props.name} value={value} disabled={disabled} />
+          <Field id={`${props.name}-${value}`} css={css`display: none`} type={type} name={props.name} value={value} disabled={disabled || disabled} />
           <div>
             <label
               htmlFor={`${props.name}-${value}`}
@@ -185,7 +185,7 @@ const OptionsInput: React.FC<FieldProps & { options: Option[] }> = ({label, opti
   )
 }
 
-const SubmitButton:React.FC<{isSubmiting?: boolean}> = ({children, isSubmiting}) => (
+const SubmitButton:React.FC<{isSubmiting?: boolean, disabled?: boolean}> = ({children, isSubmiting, disabled}) => (
   <button
     css={css`
       display: flex;
@@ -211,7 +211,7 @@ const SubmitButton:React.FC<{isSubmiting?: boolean}> = ({children, isSubmiting})
       }
     `}
     type="submit"
-    disabled={isSubmiting}
+    disabled={disabled}
   >
     <Image src={strom4} layout="fixed" height="20" width="20" alt=""/>
     &nbsp;{children}
@@ -224,7 +224,7 @@ function isString(x: any): x is string {
   return typeof x === "string";
 }
 
-export const ParticipantForm: React.FC = () => {
+export const ParticipantForm: React.FC<{disabled?: boolean}> = ({disabled}) => {
   const alert = useAlert()
   return (
     <Formik<Partial<ParticipantToRegister>>
@@ -255,10 +255,10 @@ export const ParticipantForm: React.FC = () => {
       }}
     >
       {props => (
-        <Form css={css`max-width: 300px`}>
-          <TextInput label={<>...jaké je tvé <strong>jméno</strong>,</>} name="firstName" disabled={props.isSubmitting} />
-          <TextInput label={<><strong>příjmení</strong>,</>} name="surName"  disabled={props.isSubmitting}/>
-          <TextInput label={<>a <strong>e-mail</strong>.</>} name="email"  disabled={props.isSubmitting}/>
+        <Form css={css`max-width: 300px; ${disabled ? "opacity: 0.4;" : ""}`}>
+          <TextInput label={<>...jaké je tvé <strong>jméno</strong>,</>} name="firstName" disabled={disabled || props.isSubmitting} />
+          <TextInput label={<><strong>příjmení</strong>,</>} name="surName"  disabled={disabled || props.isSubmitting}/>
+          <TextInput label={<>a <strong>e-mail</strong>.</>} name="email"  disabled={disabled || props.isSubmitting}/>
           <OptionsInput
             label="Přijedeš"
             name="count"
@@ -277,9 +277,9 @@ export const ParticipantForm: React.FC = () => {
                 value: Count.more
               }
             ]}
-            disabled={props.isSubmitting}
+            disabled={disabled || props.isSubmitting}
           />
-          {props.values?.count === "more" && <TextInput label="No a kolik vás teda bude?" name="familyCount" disabled={props.isSubmitting} />}
+          {props.values?.count === "more" && <TextInput label="No a kolik vás teda bude?" name="familyCount" disabled={disabled || props.isSubmitting} />}
           <OptionsInput
             label="S hostinou nám"
             name="helpWithFood"
@@ -294,7 +294,7 @@ export const ParticipantForm: React.FC = () => {
                 value: "no"
               }
             ]}
-            disabled={props.isSubmitting}
+            disabled={disabled || props.isSubmitting}
           />
           {props.values?.helpWithFood === "yes" && (
             <OptionsInput
@@ -330,10 +330,10 @@ export const ParticipantForm: React.FC = () => {
                   value: KindOfFood.Others
                 }
               ]}
-              disabled={props.isSubmitting}
+              disabled={disabled || props.isSubmitting}
             />
           )}
-          {props.values?.helpWithFood === "yes" && props.values?.kindOfFood?.find(item => item === KindOfFood.Others) && <TextInput label="A jakou pak?" name="kindOfFoodSpec" disabled={props.isSubmitting} />}
+          {props.values?.helpWithFood === "yes" && props.values?.kindOfFood?.find(item => item === KindOfFood.Others) && <TextInput label="A jakou pak?" name="kindOfFoodSpec" disabled={disabled || props.isSubmitting} />}
           <OptionsInput
             label={<>Dál by nás zajímalo, jestli {isAlone(props.values.count) ? "přijedeš" : "přijedete"}</>}
             name="arrival"
@@ -348,7 +348,7 @@ export const ParticipantForm: React.FC = () => {
                 value: Arrival.Sunday
               }
             ]}
-            disabled={props.isSubmitting}
+            disabled={disabled || props.isSubmitting}
           />
           <OptionsInput
             label={<>A taky jestli {isAlone(props.values.count) ? "plánuješ" : "plánujete"} odjet</>}
@@ -368,10 +368,10 @@ export const ParticipantForm: React.FC = () => {
                 value: Departure.Sunday
               },
             ]}
-            disabled={props.isSubmitting}
+            disabled={disabled || props.isSubmitting}
           />
-          <TextInput type={"textarea"} label={<>Ještě něco nám {isAlone(props.values.count) ? "napiš" : "napište"}&hellip;</>} name="note" disabled={props.isSubmitting} />
-          <SubmitButton isSubmiting={props.isSubmitting}>Odeslat</SubmitButton>
+          <TextInput type={"textarea"} label={<>Ještě něco nám {isAlone(props.values.count) ? "napiš" : "napište"}&hellip;</>} name="note" disabled={disabled || props.isSubmitting} />
+          <SubmitButton isSubmiting={props.isSubmitting} disabled={disabled || props.isSubmitting}>Odeslat</SubmitButton>
         </Form>
       )}
     </Formik>

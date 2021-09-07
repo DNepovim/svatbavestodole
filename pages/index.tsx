@@ -296,7 +296,7 @@ export default function Home() {
           </Column>
           <Column span={3}>
             <Title level={2} image={strom4}>Dej nám vědět&hellip;</Title>
-            <ParticipantForm />
+            <ParticipantForm disabled />
           </Column>
           <Column>
             <Title image={strom3} level={2}>Máte-li dotaz&hellip;</Title>
